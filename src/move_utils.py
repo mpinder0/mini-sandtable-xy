@@ -4,7 +4,7 @@ import math
 class MoveUtils:
 
     distance_per_step = 0.0
-    last_position = (0, 0)
+    last_position = None
 
     def __init__(self, distance_per_step):
         self.distance_per_step = distance_per_step
@@ -27,7 +27,7 @@ class MoveUtils:
 
         distance_to_move = tuple(map(sub, new_position, self.last_position))
         steps_to_move = tuple(map(self.mm_to_steps, distance_to_move))
-        #print(steps_to_move)
+        print(new_position, distance_to_move, steps_to_move)
 
         step_list = self.get_move_steps_from_step_distance(steps_to_move)
         step_actions = self.get_move_actions_from_step_list(step_list)
@@ -35,14 +35,17 @@ class MoveUtils:
     
     def get_move_steps_from_step_distance(self, steps_to_move):
         axis_max = max(steps_to_move)
-        x_ratio = steps_to_move[0] / axis_max
-        y_ratio = steps_to_move[1] / axis_max
+        if axis_max != 0:
+            x_ratio = steps_to_move[0] / axis_max
+            y_ratio = steps_to_move[1] / axis_max
 
-        step_numbers = range(axis_max + 1)
-        x_steps = [math.floor(x_ratio*n) for n in step_numbers]
-        y_steps = [math.floor(y_ratio*n) for n in step_numbers]
-        steps = list(zip(x_steps, y_steps))
-        return steps
+            step_numbers = range(axis_max + 1)
+            x_steps = [math.floor(x_ratio*n) for n in step_numbers]
+            y_steps = [math.floor(y_ratio*n) for n in step_numbers]
+            steps = list(zip(x_steps, y_steps))
+            return steps
+        else:
+            return []
 
     def get_move_actions_from_step_list(self, move_step_counts):
         x_direction = 'R' if move_step_counts[-1][0] < 0 else 'F'

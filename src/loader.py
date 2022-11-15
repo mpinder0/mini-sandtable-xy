@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import pandas as pd
 from pygcode import Line
 

@@ -9,7 +9,7 @@ import loader
 bed_size_x = 450 # mm
 bed_size_y = 450 # mm
 distance_per_step = 0.45
-speed = 1 # distance (mm) per second
+speed = 2 # distance (mm) per second
 s_per_step = 1/(speed/distance_per_step) # seconds per step for speed
 
 kit = MotorKit(i2c=board.I2C(), steppers_microsteps=4)
@@ -18,10 +18,11 @@ move_util = MoveUtils(0.45)
 def execute_pattern(pattern_df):
     # iterate over dataframe coords
     for row in pattern_df.itertuples():
-        print('Move to X:', row['X'], ', Y:', row['Y'])
+        r = (row[1], row[2])
+        print('Move to X:', r[0], ', Y:', r[1])
         
         # using target coordinates, get the step actions
-        (direction, move) = move_util.get_move_actions_from_positions(row)
+        (direction, move) = move_util.get_move_actions_from_positions(r)
         
         # set directions
         x_direction = stepper.FORWARD if direction[0] == 'F' else stepper.BACKWARD
@@ -33,6 +34,7 @@ def execute_pattern(pattern_df):
                 kit.stepper1.onestep(direction=x_direction, style=stepper.MICROSTEP)
             if step[1]:
                 kit.stepper2.onestep(direction=y_direction, style=stepper.MICROSTEP)
+            print('.')
             time.sleep(s_per_step)
 
 
