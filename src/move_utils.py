@@ -34,7 +34,7 @@ class MoveUtils:
         return step_actions
     
     def get_move_steps_from_step_distance(self, steps_to_move):
-        axis_max = max(steps_to_move)
+        axis_max = max(map(abs,steps_to_move))
         if axis_max != 0:
             x_ratio = steps_to_move[0] / axis_max
             y_ratio = steps_to_move[1] / axis_max
@@ -48,6 +48,9 @@ class MoveUtils:
             return []
 
     def get_move_actions_from_step_list(self, move_step_counts):
+        if len(move_step_counts) < 1:
+            return ((None, None), [])
+
         x_direction = 'R' if move_step_counts[-1][0] < 0 else 'F'
         y_direction = 'R' if move_step_counts[-1][1] < 0 else 'F'
         directions = (x_direction, y_direction)

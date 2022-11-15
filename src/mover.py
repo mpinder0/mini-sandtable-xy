@@ -19,7 +19,7 @@ def execute_pattern(pattern_df):
     # iterate over dataframe coords
     for row in pattern_df.itertuples():
         r = (row[1], row[2])
-        print('Move to X:', r[0], ', Y:', r[1])
+        print('\nMove to X:', r[0], ', Y:', r[1])
         
         # using target coordinates, get the step actions
         (direction, move) = move_util.get_move_actions_from_positions(r)
@@ -34,7 +34,7 @@ def execute_pattern(pattern_df):
                 kit.stepper1.onestep(direction=x_direction, style=stepper.MICROSTEP)
             if step[1]:
                 kit.stepper2.onestep(direction=y_direction, style=stepper.MICROSTEP)
-            print('.')
+            print('.', end='', flush=True)
             time.sleep(s_per_step)
 
 
