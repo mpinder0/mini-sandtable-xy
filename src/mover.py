@@ -13,6 +13,12 @@ s_per_step = 1/(speed/distance_per_step) # seconds per step for speed
 kit = MotorKit(i2c=board.I2C(), steppers_microsteps=4)
 move_util = MoveUtils(0.45)
 
+def move_to_zero():
+    # to do, replace this with referencing logic
+    print("Are both axis at 0 position? Y/N")
+    answer = Input()
+    return answer == 'Y'
+
 def execute_pattern(pattern_df):
     # iterate over dataframe coords
     for row in pattern_df.itertuples():
@@ -37,4 +43,5 @@ def execute_pattern(pattern_df):
 
 
 df = loader.load_pattern()
+move_to_zero()
 execute_pattern(df)
