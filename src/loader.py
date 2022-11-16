@@ -7,9 +7,9 @@ bed_size_y = 45 # mm
 filename = 'tests/gcode/square-spiral.gcode'
 
 def scale_pattern(pattern_df):
-    pattern_max = pattern_df.max()
+    pattern_max = pattern_df.max().max()
     bed_min = min(bed_size_x, bed_size_y)
-    ratio = pattern_max / bed_min
+    ratio = bed_min / pattern_max
     print('scaling ratio: ', ratio)
 
     return pattern_df.multiply(ratio)
