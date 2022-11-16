@@ -17,17 +17,19 @@ class MoveUtils:
     def limit(self, value, maximum):
         return min(value, maximum)
 
-    def scale(self, value, v_min, v_max, out_min, out_max):
-        # y = mx+c
-        pass
-
     def get_move_actions_from_positions(self, new_position):
         distance_to_move = tuple(map(sub, new_position, self.last_position))
         steps_to_move = tuple(map(self.mm_to_steps, distance_to_move))
-        print(new_position, distance_to_move, steps_to_move)
+        
+        print(self.last_position, new_position)
+        print(distance_to_move, steps_to_move)
 
         step_list = self.get_move_steps_from_step_distance(steps_to_move)
         step_actions = self.get_move_actions_from_step_list(step_list)
+
+        # update last position request
+        self.last_position = new_position
+        
         return step_actions
     
     def get_move_steps_from_step_distance(self, steps_to_move):
