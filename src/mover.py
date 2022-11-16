@@ -6,8 +6,6 @@ from adafruit_motorkit import MotorKit
 from move_utils import MoveUtils
 import loader
 
-bed_size_x = 450 # mm
-bed_size_y = 450 # mm
 distance_per_step = 0.45
 speed = 2 # distance (mm) per second
 s_per_step = 1/(speed/distance_per_step) # seconds per step for speed

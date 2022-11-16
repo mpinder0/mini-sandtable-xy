@@ -1,7 +1,19 @@
 import pandas as pd
 from pygcode import Line
 
+bed_size_x = 45 # mm
+bed_size_y = 45 # mm
+
 filename = 'tests/gcode/square-spiral.gcode'
+
+def scale_pattern(pattern_df):
+    pattern_max = pattern_df.max()
+    bed_min = min(bed_size_x, bed_size_y)
+    ratio = pattern_max / bed_min
+    print('scaling ratio: ', ratio)
+
+    return pattern_df.multiply(ratio)
+
 def load_pattern():
     coords = []
 
@@ -15,4 +27,8 @@ def load_pattern():
 
     pattern_df = pd.DataFrame.from_dict(coords)
     print('Loaded file as dataframe.')
-    return pattern_df
+
+    scaled_df = scale_pattern(pattern_df)
+    print('Rescale to axis limits')
+
+    return scaled_df
