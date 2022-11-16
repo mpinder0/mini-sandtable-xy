@@ -15,9 +15,9 @@ move_util = MoveUtils(0.45)
 
 def move_to_zero():
     # to do, replace this with referencing logic
-    print("Are both axis at 0 position? Y/N")
-    answer = Input()
-    return answer == 'Y'
+    print('Are both axis at 0 position? y/n')
+    answer = input()
+    return answer == 'y'
 
 def execute_pattern(pattern_df):
     # iterate over dataframe coords
@@ -43,5 +43,5 @@ def execute_pattern(pattern_df):
 
 
 df = loader.load_pattern()
-move_to_zero()
-execute_pattern(df)
+if move_to_zero():
+    execute_pattern(df)
