@@ -4,7 +4,7 @@ import math
 class MoveUtils:
 
     distance_per_step = 0.0
-    last_position = None
+    last_position = (0, 0)
 
     def __init__(self, distance_per_step):
         self.distance_per_step = distance_per_step
@@ -22,9 +22,6 @@ class MoveUtils:
         pass
 
     def get_move_actions_from_positions(self, new_position):
-        if not self.last_position:
-            self.last_position = new_position
-
         distance_to_move = tuple(map(sub, new_position, self.last_position))
         steps_to_move = tuple(map(self.mm_to_steps, distance_to_move))
         print(new_position, distance_to_move, steps_to_move)
