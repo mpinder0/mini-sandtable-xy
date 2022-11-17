@@ -15,6 +15,8 @@ move_util = MoveUtils(0.45)
 
 def move_to_zero():
     # to do, replace this with referencing logic
+    kit.stepper1.release()
+    kit.stepper2.release()
     print('Are both axis at 0 position? y/n')
     answer = input()
     return answer == 'y'
