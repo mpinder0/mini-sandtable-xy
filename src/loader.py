@@ -14,7 +14,7 @@ def scale_pattern(pattern_df):
     ratio = bed_min / (pattern_max - pattern_min)
     print('scaling ratio: ', ratio)
 
-    return pattern_df.multiply(ratio).add(pattern_min)
+    return pattern_df.sub(pattern_min).multiply(ratio)
 
 def load_pattern():
     coords = []
