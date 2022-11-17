@@ -9,11 +9,12 @@ filename = 'tests/gcode/square-spiral.gcode'
 
 def scale_pattern(pattern_df):
     pattern_max = pattern_df.max().max()
+    pattern_min = pattern_df.min().min()
     bed_min = min(bed_size_x, bed_size_y)
-    ratio = bed_min / pattern_max
+    ratio = bed_min / (pattern_max - pattern_min)
     print('scaling ratio: ', ratio)
 
-    return pattern_df.multiply(ratio)
+    return pattern_df.multiply(ratio).add(pattern_min)
 
 def load_pattern():
     coords = []
