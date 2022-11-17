@@ -4,8 +4,8 @@ from pygcode import Line
 bed_size_x = 45 # mm
 bed_size_y = 45 # mm
 
-#filename = 'tests/gcode/square-spiral.gcode'
-filename = 'tests/gcode/axis-test.gcode'
+filename = 'tests/gcode/square-spiral.gcode'
+#filename = 'tests/gcode/axis-test.gcode'
 
 def scale_pattern(pattern_df):
     pattern_max = pattern_df.max().max()

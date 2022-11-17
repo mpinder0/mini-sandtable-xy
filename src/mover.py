@@ -6,12 +6,12 @@ from adafruit_motorkit import MotorKit
 from move_utils import MoveUtils
 import loader
 
-distance_per_step = 0.45
+distance_per_step = 0.045
 speed = 2 # distance (mm) per second
 s_per_step = 1/(speed/distance_per_step) # seconds per step for speed
 
 kit = MotorKit(i2c=board.I2C(), steppers_microsteps=4)
-move_util = MoveUtils(0.45)
+move_util = MoveUtils(distance_per_step)
 
 def move_to_zero():
     # to do, replace this with referencing logic
